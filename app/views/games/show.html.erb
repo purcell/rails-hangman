@@ -1,1 +1,9 @@
-Showing game
+<h1>Game of Hangman</h1>
+
+<p class="hangman">
+  <% @game.masked_word_letters.each do |letter| %>
+    <span class="letter <%= 'letter-guessable' unless letter %>">
+      <%= letter %>
+    </span>
+  <% end %>
+</p>

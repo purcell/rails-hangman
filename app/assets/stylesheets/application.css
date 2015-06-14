@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+html {
+    background-color: #efefef;
+    color: #666;
+}
+
+h1, h2, h3, h4, h5, h6, b, strong {
+    color: #444;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+.btn {
+    padding: 5px;
+    border: solid 1px rgba(0 0 0 0.2);
+    cursor: pointer;
+    border-radius: 3px;
+}
+.btn-default {
+}
+.btn-primary {
+    background-color: #ccf;
+}

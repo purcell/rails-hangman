@@ -5,7 +5,7 @@ RSpec.describe Game, type: :model do
   let(:dictionary) { File.read(Rails.root + "config/words.txt").split(/\n/) }
 
   context "when creating a game" do
-    it "can be created with a word" do
+    it "allows a word to be specified" do
       g = Game.create!(word: "hello")
       expect(g.word).to eql("hello")
     end

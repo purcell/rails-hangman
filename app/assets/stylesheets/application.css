@@ -52,3 +52,23 @@ h1 {
 .letter-guessable {
     background: #fff;
 }
+
+.keyboard-row {
+    padding-bottom: 0.5em;
+}
+.keyboard-key {
+    display: inline-block;
+    text-align: center;
+    padding: 0.25em;
+    width: 1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #ddd;
+    border: solid 1px #ccc;
+}
+.keyboard-row2 {
+    padding-left: 1em;
+}
+.keyboard-row3 {
+    padding-left: 2em;
+}

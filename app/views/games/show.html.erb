@@ -7,3 +7,23 @@
     </span>
   <% end %>
 </p>
+
+
+<div class="keyboard">
+  <div class="keyboard-row keyboard-row1">
+    <% "qwertyuiop".chars.each do |letter| %>
+      <%= link_to letter, '#', class: 'keyboard-key' %>
+    <% end %>
+  </div>
+  <div class="keyboard-row keyboard-row2">
+    <% "asdfghjkl".chars.each do |letter| %>
+      <%= link_to letter, '#', class: 'keyboard-key' %>
+    <% end %>
+
+  </div>
+  <div class="keyboard-row keyboard-row3">
+    <% "zxcvbnm".chars.each do |letter| %>
+      <%= link_to letter, '#', class: 'keyboard-key' %>
+    <% end %>
+  </div>
+</div>

@@ -44,10 +44,14 @@ h1 {
 }
 
 .letter {
+    font-family: monospace;
     display: inline-block;
     text-align: center;
+    vertical-align: middle;
     width: 1.5em;
     height: 1.5em;
+    padding: 0.25em 0 0 0;
+    margin-bottom: 0.5em;
 }
 .letter-guessable {
     background: #fff;
@@ -60,11 +64,15 @@ h1 {
     display: inline-block;
     text-align: center;
     padding: 0.25em;
-    width: 1em;
+    width: 2em;
     text-transform: uppercase;
     text-decoration: none;
     background: #ddd;
     border: solid 1px #ccc;
+    cursor: pointer;
+}
+.keyboard-row form {
+    display: inline-block;
 }
 .keyboard-row2 {
     padding-left: 1em;

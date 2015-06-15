@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :games
+  resources :games do
+    resources :guesses
+  end
 
   root "games#index"
 

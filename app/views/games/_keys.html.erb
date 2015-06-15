@@ -1,0 +1,4 @@
+<% keys.chars.each do |letter| %>
+  <% guess = Guess.new(letter: letter) %>
+  <%= button_to(letter, [@game, guess], params: {"guess[letter]": letter}, class: 'keyboard-key') %>
+<% end %>

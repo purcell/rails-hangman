@@ -83,3 +83,20 @@ h1 {
 .keyboard-row3 {
     padding-left: 2em;
 }
+
+.lives-remaining {
+    display: inline;
+    padding-left: 0;
+    list-style-type: none;
+}
+.lives-life {
+    display: inline;
+    margin-bottom: 1em;
+    color: #c22;
+}
+.lives-life-remaining {
+    color: #2c2;
+}
+section + section {
+    margin-top: 1em;
+}

@@ -23,7 +23,9 @@ RSpec.describe Game, type: :model do
     end
 
     it "reports how many guesses remain" do
-      expect(Game.create!.guesses_remaining).to eql(8)
+      g = Game.create!
+      expect(g.lives_remaining).to eql(8)
+      expect(g.initial_lives).to eql(g.lives_remaining)
     end
   end
 
@@ -36,13 +38,13 @@ RSpec.describe Game, type: :model do
     it "allows a wrong guess to be added" do
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'd')
-      expect(g.guesses_remaining).to eql(7)
+      expect(g.lives_remaining).to eql(g.initial_lives - 1)
     end
 
     it "allows a correct guess to be added" do
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'c')
-      expect(g.guesses_remaining).to eql(7)
+      expect(g.lives_remaining).to eql(g.initial_lives)
       expect(g.masked_word_letters).to eql([nil, nil, 'c'])
     end
 

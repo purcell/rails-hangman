@@ -1,15 +1,23 @@
 <h1>Game of Hangman</h1>
 
-<p class="hangman">
+<section class="hangman">
   <% @game.masked_word_letters.each do |letter| %>
     <span class="letter <%= 'letter-guessable' unless letter %>">
       <%= letter %>
     </span>
   <% end %>
-</p>
+</section>
 
+<section>
+  Lives remaining:
+  <ul class="lives-remaining">
+    <% 0.upto(@game.initial_lives) do |i| %>
+      <li class="lives-life <%= 'lives-life-remaining' if i <= @game.lives_remaining %>">☺</li>
+    <% end %>
+  </ul>
+</section>
 
-<div class="keyboard">
+<section class="keyboard">
   <div class="keyboard-row keyboard-row1">
     <%= render partial: 'games/keys', locals: {game: @game, keys: "qwertyuiop"} %>
   </div>
@@ -19,4 +27,4 @@
   <div class="keyboard-row keyboard-row3">
     <%= render partial: 'games/keys', locals: {game: @game, keys: "zxcvbnm"} %>
   </div>
-</div>
+</section>

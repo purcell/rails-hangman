@@ -13,8 +13,12 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def guesses_remaining
-    8 - guesses.size
+  def initial_lives
+    8
+  end
+
+  def lives_remaining
+    initial_lives - wrong_guesses.size
   end
 
   def already_guessed?(letter)
@@ -22,6 +26,10 @@ class Game < ActiveRecord::Base
   end
 
   private
+
+  def wrong_guesses
+    guessed_letters.select { |letter| !word.downcase.include?(letter.downcase) }
+  end
 
   def guessed_letters
     guesses.map(&:letter).map(&:downcase)

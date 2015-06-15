@@ -30,9 +30,7 @@ RSpec.describe GamesController, type: :controller do
       end
 
       it "handles attempts to show a missing game" do
-        get :show, id: 10
-        expect(response).to have_http_status(404)
-        expect(response).to render_template("application/404")
+        expect { get :show, id: 10 }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

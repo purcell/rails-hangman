@@ -71,6 +71,9 @@ h1 {
     border: solid 1px #ccc;
     cursor: pointer;
 }
+.keyboard-key:disabled {
+    cursor: default;
+}
 .keyboard-row form {
     display: inline-block;
 }

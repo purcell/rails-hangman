@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
 
   def masked_word_letters
     word.chars.map do |c|
-      if c =~ /[a-z]/i && !guessed_letters.include?(c.downcase)
+      if c =~ /[a-z]/i && !already_guessed?(c)
         nil
       else
         c
@@ -15,6 +15,10 @@ class Game < ActiveRecord::Base
 
   def guesses_remaining
     8 - guesses.size
+  end
+
+  def already_guessed?(letter)
+    guessed_letters.include?(letter.downcase)
   end
 
   private

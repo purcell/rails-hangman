@@ -55,5 +55,12 @@ RSpec.describe Game, type: :model do
       g.guesses.create!(letter: 'C')
       expect(g.masked_word_letters).to eql([nil, nil, 'c'])
     end
+
+    it "can tell whether a letter has already been guessed" do
+      g = Game.create!(word: "abc")
+      expect(g.already_guessed?('c')).to eql(false)
+      g.guesses.create!(letter: 'c')
+      expect(g.already_guessed?('c')).to eql(true)
+    end
   end
 end

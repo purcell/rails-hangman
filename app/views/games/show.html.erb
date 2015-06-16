@@ -8,23 +8,33 @@
   <% end %>
 </section>
 
-<section>
-  Lives remaining:
-  <ul class="lives-remaining">
-    <% (1..@game.initial_lives).each do |i| %>
-      <li class="lives-life <%= 'lives-life-remaining' if i <= @game.lives_remaining %>">☺</li>
-    <% end %>
-  </ul>
-</section>
+<% if @game.won? %>
+  <p>
+    <strong>Yay, you won!!</strong>
+  </p>
+<% elsif @game.lost? %>
+  <p>
+    <strong>Aww, sorry: you lost!!</strong>
+  </p>
+<% else %>
+  <section>
+    Lives remaining:
+    <ul class="lives-remaining">
+      <% (1..@game.initial_lives).each do |i| %>
+        <li class="lives-life <%= 'lives-life-remaining' if i <= @game.lives_remaining %>">☺</li>
+      <% end %>
+    </ul>
+  </section>
 
-<section class="keyboard">
-  <div class="keyboard-row keyboard-row1">
-    <%= render partial: 'games/keys', locals: {game: @game, keys: "qwertyuiop"} %>
-  </div>
-  <div class="keyboard-row keyboard-row2">
-    <%= render partial: 'games/keys', locals: {game: @game, keys: "asdfghjkl"} %>
-  </div>
-  <div class="keyboard-row keyboard-row3">
-    <%= render partial: 'games/keys', locals: {game: @game, keys: "zxcvbnm"} %>
-  </div>
-</section>
+  <section class="keyboard">
+    <div class="keyboard-row keyboard-row1">
+      <%= render partial: 'games/keys', locals: {game: @game, keys: "qwertyuiop"} %>
+    </div>
+    <div class="keyboard-row keyboard-row2">
+      <%= render partial: 'games/keys', locals: {game: @game, keys: "asdfghjkl"} %>
+    </div>
+    <div class="keyboard-row keyboard-row3">
+      <%= render partial: 'games/keys', locals: {game: @game, keys: "zxcvbnm"} %>
+    </div>
+  </section>
+<% end %>

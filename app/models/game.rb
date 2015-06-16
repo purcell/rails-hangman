@@ -25,6 +25,14 @@ class Game < ActiveRecord::Base
     guessed_letters.include?(letter.downcase)
   end
 
+  def lost?
+    lives_remaining <= 0
+  end
+
+  def won?
+    masked_word_letters.select(&:nil?).empty?
+  end
+
   private
 
   def wrong_guesses

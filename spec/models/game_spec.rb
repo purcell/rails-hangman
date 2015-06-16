@@ -30,6 +30,12 @@ RSpec.describe Game, type: :model do
   end
 
   context "when no guesses have been made" do
+    it "doesn't report that the game is done" do
+      game = Game.create!(word: 'abc')
+      expect(game.won?).to eql(false)
+      expect(game.lost?).to eql(false)
+    end
+
     it "provides a masked version of the word's letters" do
       expect(Game.create!(word: "mad props").masked_word_letters).to eql([nil, nil, nil, " ", nil, nil, nil, nil, nil])
       expect(Game.create!(word: "it's good").masked_word_letters).to eql([nil, nil, "'", nil, " ", nil, nil, nil, nil])
@@ -63,6 +69,28 @@ RSpec.describe Game, type: :model do
       expect(g.already_guessed?('c')).to eql(false)
       g.guesses.create!(letter: 'c')
       expect(g.already_guessed?('c')).to eql(true)
+    end
+  end
+
+  context "when all lives have been lost" do
+    it "reports that the game is lost" do
+      g = Game.create!(word: 'abc')
+      ('d'..'z').first(g.lives_remaining).each do |letter|
+        g.guesses.create!(letter: letter)
+      end
+      expect(g.lost?).to eql(true)
+      expect(g.won?).to eql(false)
+    end
+  end
+
+  context "when all letters have been guessed" do
+    it "reports that the game is won" do
+      g = Game.create!(word: 'abc')
+      'abc'.chars.each do |letter|
+        g.guesses.create!(letter: letter)
+      end
+      expect(g.lost?).to eql(false)
+      expect(g.won?).to eql(true)
     end
   end
 end

@@ -54,6 +54,9 @@ h1 {
 .letter-guessable {
     background: #fff;
 }
+.letter-missed {
+    background: #fcc;
+}
 
 .keyboard-row {
     padding-bottom: 0.5em;

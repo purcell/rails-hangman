@@ -29,6 +29,10 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  def masked_letters(game)
+    game.letters.map { |l| l.char unless l.guessable? }
+  end
+
   context "when no guesses have been made" do
     it "doesn't report that the game is done" do
       game = Game.create!(word: 'abc')
@@ -37,8 +41,8 @@ RSpec.describe Game, type: :model do
     end
 
     it "provides a masked version of the word's letters" do
-      expect(Game.create!(word: "mad props").masked_word_letters).to eql([nil, nil, nil, " ", nil, nil, nil, nil, nil])
-      expect(Game.create!(word: "it's good").masked_word_letters).to eql([nil, nil, "'", nil, " ", nil, nil, nil, nil])
+      expect(masked_letters(Game.create!(word: "mad props"))).to eql([nil, nil, nil, " ", nil, nil, nil, nil, nil])
+      expect(masked_letters(Game.create!(word: "it's good"))).to eql([nil, nil, "'", nil, " ", nil, nil, nil, nil])
     end
 
     it "allows a wrong guess to be added" do
@@ -51,24 +55,27 @@ RSpec.describe Game, type: :model do
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'c')
       expect(g.lives_remaining).to eql(g.initial_lives)
-      expect(g.masked_word_letters).to eql([nil, nil, 'c'])
+      expect(masked_letters(g)).to eql([nil, nil, 'c'])
+      expect(g.letters[2].guessed).to eql(true)
     end
 
     it "allows a correct guess whne the case differs" do
       g = Game.create!(word: "ABC")
       g.guesses.create!(letter: 'c')
-      expect(g.masked_word_letters).to eql([nil, nil, 'C'])
+      expect(masked_letters(g)).to eql([nil, nil, 'C'])
 
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'C')
-      expect(g.masked_word_letters).to eql([nil, nil, 'c'])
+      expect(masked_letters(g)).to eql([nil, nil, 'c'])
     end
 
     it "can tell whether a letter has already been guessed" do
       g = Game.create!(word: "abc")
       expect(g.already_guessed?('c')).to eql(false)
+      expect(g.letters[2].guessed).to eql(false)
       g.guesses.create!(letter: 'c')
       expect(g.already_guessed?('c')).to eql(true)
+      expect(g.letters[2].guessed).to eql(true)
     end
   end
 

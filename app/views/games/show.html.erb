@@ -1,10 +1,16 @@
 <h1>Game of Hangman</h1>
 
 <section class="hangman">
-  <% @game.masked_word_letters.each do |letter| %>
-    <span class="letter <%= 'letter-guessable' unless letter %>">
-      <%= letter %>
-    </span>
+  <% @game.letters.each do |letter| %>
+    <% if letter.guessable? %>
+      <% if @game.lost? %>
+        <span class="letter letter-missed"><%= letter %></span>
+      <% else %>
+        <span class="letter letter-guessable"></span>
+      <% end %>
+    <% else %>
+      <span class="letter"><%= letter %></span>
+    <% end %>
   <% end %>
 </section>
 

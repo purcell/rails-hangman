@@ -3,13 +3,17 @@ class Game < ActiveRecord::Base
 
   before_validation :choose_a_word, on: :create
 
-  def masked_word_letters
+  Letter = Struct.new(:char, :"guessed", :"guessable?") do
+    def to_s
+      char
+    end
+  end
+
+  def letters
     word.chars.map do |c|
-      if c =~ /[a-z]/i && !already_guessed?(c)
-        nil
-      else
-        c
-      end
+      guessed = already_guessed?(c)
+      guessable = (c =~ /[a-z]/i && !already_guessed?(c))
+      Letter.new(c, guessed, guessable)
     end
   end
 
@@ -30,7 +34,7 @@ class Game < ActiveRecord::Base
   end
 
   def won?
-    masked_word_letters.select(&:nil?).empty?
+    letters.select(&:guessable?).empty?
   end
 
   private

@@ -11,7 +11,7 @@
 <section>
   Lives remaining:
   <ul class="lives-remaining">
-    <% 0.upto(@game.initial_lives) do |i| %>
+    <% (1..@game.initial_lives).each do |i| %>
       <li class="lives-life <%= 'lives-life-remaining' if i <= @game.lives_remaining %>">☺</li>
     <% end %>
   </ul>

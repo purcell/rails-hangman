@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   end
 
   def initial_lives
-    6
+    4
   end
 
   def lives_remaining

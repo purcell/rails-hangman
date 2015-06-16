@@ -24,7 +24,7 @@ RSpec.describe Game, type: :model do
 
     it "reports how many guesses remain" do
       g = Game.create!
-      expect(g.lives_remaining).to eql(8)
+      expect(g.lives_remaining).to be > 3
       expect(g.initial_lives).to eql(g.lives_remaining)
     end
   end

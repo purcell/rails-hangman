@@ -100,3 +100,9 @@ h1 {
 section + section {
     margin-top: 1em;
 }
+hr {
+    height: 1px;
+    color: #ddd;
+    background-color: #ddd;
+    border: none;
+}

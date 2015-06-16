@@ -1,4 +1,3 @@
 <% keys.chars.each do |letter| %>
-  <% guess = Guess.new(letter: letter) %>
-  <%= button_to(letter, [@game, guess], params: {"guess[letter]": letter}, class: 'keyboard-key', disabled: game.already_guessed?(letter)) %>
+  <%= button_to(letter, game_guesses_url(@game, letter: letter), method: :post, class: 'keyboard-key', disabled: game.already_guessed?(letter)) %>
 <% end %>

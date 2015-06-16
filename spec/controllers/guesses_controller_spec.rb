@@ -5,7 +5,7 @@ RSpec.describe GuessesController, type: :controller do
     describe "POST #create" do
       it "stores a valid guess" do
         game = Game.create!
-        post :create, game_id: game.id, guess: { letter: 'b' }
+        post :create, game_id: game.id, letter: 'b'
         expect(response).to redirect_to(game_url(game))
         game.reload
         expect(game.guesses.size).to eql(1)

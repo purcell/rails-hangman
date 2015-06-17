@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
+  render_views
+
   context "when responding to requests" do
     describe "GET #index" do
       it "renders the index template" do

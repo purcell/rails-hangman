@@ -33,7 +33,7 @@ h1 {
 
 .btn {
     padding: 5px;
-    border: solid 1px rgba(0 0 0 0.2);
+    border: solid 1px rgba(0,0,0,0.2);
     cursor: pointer;
     border-radius: 3px;
 }

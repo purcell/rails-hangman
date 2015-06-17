@@ -5,6 +5,8 @@ class CreateGuess
   end
 
   def call
-    @game.lives_remaining > 0 && @game.guesses.build(letter: @letter).save
+    @game.with_lock do
+      @game.lives_remaining > 0 && @game.guesses.build(letter: @letter).save
+    end
   end
 end

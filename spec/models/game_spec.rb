@@ -30,7 +30,7 @@ RSpec.describe Game, type: :model do
   end
 
   def masked_letters(game)
-    game.letters.map { |l| l.char unless l.guessable? }
+    game.letters.map { |l| l.guessable? ? "_" : l.char }.join
   end
 
   context "when no guesses have been made" do
@@ -41,8 +41,8 @@ RSpec.describe Game, type: :model do
     end
 
     it "provides a masked version of the word's letters" do
-      expect(masked_letters(Game.create!(word: "mad props"))).to eql([nil, nil, nil, " ", nil, nil, nil, nil, nil])
-      expect(masked_letters(Game.create!(word: "it's good"))).to eql([nil, nil, "'", nil, " ", nil, nil, nil, nil])
+      expect(masked_letters(Game.create!(word: "mad props"))).to eql("___ _____")
+      expect(masked_letters(Game.create!(word: "it's good"))).to eql("__'_ ____")
     end
 
     it "allows a wrong guess to be added" do
@@ -55,18 +55,18 @@ RSpec.describe Game, type: :model do
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'c')
       expect(g.lives_remaining).to eql(g.initial_lives)
-      expect(masked_letters(g)).to eql([nil, nil, 'c'])
+      expect(masked_letters(g)).to eql("__c")
       expect(g.letters[2].guessed).to eql(true)
     end
 
     it "allows a correct guess whne the case differs" do
       g = Game.create!(word: "ABC")
       g.guesses.create!(letter: 'c')
-      expect(masked_letters(g)).to eql([nil, nil, 'C'])
+      expect(masked_letters(g)).to eql("__C")
 
       g = Game.create!(word: "abc")
       g.guesses.create!(letter: 'C')
-      expect(masked_letters(g)).to eql([nil, nil, 'c'])
+      expect(masked_letters(g)).to eql("__c")
     end
 
     it "can tell whether a letter has already been guessed" do
